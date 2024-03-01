@@ -1,24 +1,33 @@
-import React from 'react';
-import logo from './logo.svg';
+import React, { useEffect, useState } from 'react';
+import logo from '../images/favicon-32x32.png';
+import icon_dice from './images/icon-dice.svg'
 import './App.css';
+import AdviceComponent from './Components/AdviceComponent';
+import getData from './DataServices/DataService';
+import Advice from './Interfaces/Interfaces';
 
 function App() {
+
+  const [advice, setAdvice] = useState<Advice>()
+
+  useEffect(() => {
+    const adviceData = async () => {
+      const fetchData = await getData();
+      setAdvice(fetchData);
+  }
+    adviceData();
+  }, [])
+
+  const randomAdvice = async () => {
+    const fetchData = await getData();
+    setAdvice(fetchData);
+  }
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      {
+        advice && <AdviceComponent id={advice.slip.id} advice={advice.slip.advice} />
+      }
+      <button onClick={randomAdvice}><img src={icon_dice} alt="" /></button>
     </div>
   );
 }
