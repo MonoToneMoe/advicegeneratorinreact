@@ -13,7 +13,7 @@ const AdviceComponent = (props: {id: number, advice: string}) => {
 
     return (
         <div className='box'>
-            <h3>Advice #{props.id}</h3>
+            <h3>ADVICE #{props.id}</h3>
             <h1>"{props.advice}"</h1>
             <img className='divider-desktop' src={pattern_divider_desktop} alt="" />
             <img className='divider-mobile' src={pattern_divider_mobile} alt="" />
